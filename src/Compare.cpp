@@ -1847,8 +1847,8 @@ void alignDiffs(const CompareList_t::iterator& cmpPair)
 
 	const int maxSize = static_cast<int>(alignmentInfo.size());
 
-	const int mainEndLine = CallScintilla(MAIN_VIEW, SCI_GETLINECOUNT, 0, 0) - 1;
-	const int subEndLine = CallScintilla(SUB_VIEW, SCI_GETLINECOUNT, 0, 0) - 1;
+	int mainEndLine = CallScintilla(MAIN_VIEW, SCI_GETLINECOUNT, 0, 0) - 1;
+	int subEndLine = CallScintilla(SUB_VIEW, SCI_GETLINECOUNT, 0, 0) - 1;
 
 	// Align diffs
 	for (int i = 0; i < maxSize &&
@@ -1873,6 +1873,8 @@ void alignDiffs(const CompareList_t::iterator& cmpPair)
 			insertAlignmentFirstLine(MAIN_VIEW);
 			insertAlignmentFirstLine(SUB_VIEW);
 			off = 1;
+			++mainEndLine;
+			++subEndLine;
 		}
 
 		if (mismatchLen > 0)
